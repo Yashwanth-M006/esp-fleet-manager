@@ -1,0 +1,19 @@
+# ESP-IDF
+build/
+sdkconfig.old
+*.bin
+*.elf
+*.map
+
+# Node / Dashboard
+node_modules/
+dist/
+.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/

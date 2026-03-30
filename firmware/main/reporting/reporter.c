@@ -37,6 +37,10 @@ static void publish_heartbeat_cb(void *arg)
     reporter_publish_status_online("online");
 
     mqtt_client_publish(TOPIC_HEARTBEAT, payload);
+    reporter_publish_temperature();
+    reporter_publish_water();
+
+    
 }
 
 /* ==================================================== */
@@ -175,18 +179,23 @@ void reporter_publish_temperature(void)
     snprintf(payload, sizeof(payload),
              "{\"temperature\": %.2f}", temp);
 
-    mqtt_client_publish(TOPIC_SENSORS, payload);
+    mqtt_client_publish(TOPIC_TEMPERATURE, payload);
 }
 
 
-void reporter_publish_water(void)
+void reporter_publish_water()
 {
-    int temp = water_sensor_read();
+    int value = water_sensor_read();
 
     char payload[128];
 
-    snprintf(payload, sizeof(payload),
-             "{\"Water \": %d}", temp);
+    if (value == 1) {
+        snprintf(payload, sizeof(payload),
+                 "{\"water\":\"Water detected\"}");
+    } else {
+        snprintf(payload, sizeof(payload),
+                 "{\"water\":\"No water\"}");
+    }
 
-    mqtt_client_publish(TOPIC_SENSORS, payload);
+    mqtt_client_publish(TOPIC_WATER_SENSOR, payload);
 }

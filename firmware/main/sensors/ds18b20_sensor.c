@@ -27,18 +27,27 @@ void ds18b20_sensor_init()
 
     sensor = ds18b20_malloc();
 
-    OneWireBus_ROMCode rom_code = {0};
+    /* FIXED DEVICE DETECTION */
+    OneWireBus_SearchState search_state = {0};
+    bool found = false;
 
-    owb_read_rom(owb, &rom_code);
+    owb_search_first(owb, &search_state, &found);
+
+    if (!found) {
+        ESP_LOGE(TAG, "DS18B20 NOT FOUND!");
+        return;
+    }
+
+    OneWireBus_ROMCode rom_code = search_state.rom_code;
 
     ds18b20_init(sensor, owb, rom_code);
 
     ds18b20_use_crc(sensor, true);
-
     ds18b20_set_resolution(sensor, DS18B20_RESOLUTION_12_BIT);
 
     ESP_LOGI(TAG, "DS18B20 ready");
 }
+
 
 float ds18b20_sensor_read()
 {

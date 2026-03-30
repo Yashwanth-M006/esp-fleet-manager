@@ -30,6 +30,7 @@ int water_sensor_read(void)
     if (state == 1)
     {
         ESP_LOGI(TAG, "Water Detected");
+        
     }
     else
     {

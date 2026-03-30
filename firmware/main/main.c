@@ -4,6 +4,7 @@
 #include "ota_mgr.h"
 #include "reporter.h"
 #include "ds18b20_sensor.h"
+#include "water_sensor.h"
 
 /*
 void app_main(void)
@@ -32,4 +33,5 @@ void app_main(void)
 
     ota_mgr_init();
     ds18b20_sensor_init();
+    water_sensor_init();
 }

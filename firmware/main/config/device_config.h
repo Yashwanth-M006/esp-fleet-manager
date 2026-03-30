@@ -2,16 +2,16 @@
 
 #include "driver/gpio.h"
 
-#define DS18B20_GPIO GPIO_NUM_5
+#define DS18B20_GPIO GPIO_NUM_4
 
-#define WATER_SENSOR_GPIO 25
+#define WATER_SENSOR_GPIO GPIO_NUM_19
 
 /* ========= DEVICE ID ========= */
 #define DEVICE_ID        "esp32_01"
 
 /* ========= WIFI CONFIG ========= */
-#define WIFI_SSID     "Yashwanth"
-#define WIFI_PASSWORD "haha2209"
+#define WIFI_SSID     "Santhosh"
+#define WIFI_PASSWORD "123456789"
 
 /* ========= MQTT CONFIG ========= */
 #define MQTT_BROKER_URI "mqtts://z32b6f21.ala.asia-southeast1.emqxsl.com:8883"
@@ -37,3 +37,6 @@
 
 #define TOPIC_SENSORS       TOPIC_BASE "/sensors"
 
+#define TOPIC_WATER_SENSOR  TOPIC_SENSORS "/water_sensor"
+
+#define TOPIC_TEMPERATURE   TOPIC_SENSORS "/temp_sensor"
